@@ -35,5 +35,5 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          files: build/libs/nutrition-*.jar
+          files: build/libs/neotrition-*.jar
           generate_release_notes: true

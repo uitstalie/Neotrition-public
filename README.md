@@ -27,7 +27,7 @@
 - NeoForge **21.1+**
 - Java **21+**
 
-从 [Releases](https://github.com/uitstalie/Nutrition-public/releases) 下载 `.jar`，放入 `mods/` 文件夹。
+从 [Releases](https://github.com/uitstalie/Neotrition-public/releases) 下载 `.jar`，放入 `mods/` 文件夹。
 
 ## ⌨️ 命令
 
@@ -88,7 +88,7 @@ data/nutrition/items/<组>.json       — 物品-组绑定及手动值
 data/nutrition/effects/default.json  — 效果规则（AND/OR 条件）
 ```
 
-详见 [Wiki](https://github.com/uitstalie/Nutrition-public/wiki) 配置参考。
+详见 [Wiki](https://github.com/uitstalie/Neotrition-public/wiki) 配置参考。
 
 ## 🔨 构建
 
