@@ -123,6 +123,81 @@
     },
     {
       "item": "croptopia:strawberry"
+    },
+    {
+      "item": "alexsmobs:banana"
+    },
+    {
+      "item": "silentgear:nether_banana"
+    },
+    {
+      "item": "regions_unexplored:salmonberry"
+    },
+    {
+      "item": "regions_unexplored:duskmelon_slice"
+    },
+    {
+      "item": "regions_unexplored:hanging_earlight_fruit"
+    },
+    {
+      "item": "tsuki:grape"
+    },
+    {
+      "item": "tsuki:grape_green"
+    },
+    {
+      "item": "tsuki:ume"
+    },
+    {
+      "item": "tsuki:lemon"
+    },
+    {
+      "item": "tsuki:lime"
+    },
+    {
+      "item": "tsuki:lemon_juice"
+    },
+    {
+      "item": "tsuki:lime_juice"
+    },
+    {
+      "item": "tsuki:cola"
+    },
+    {
+      "item": "tsuki:blackcurrant_juice"
+    },
+    {
+      "item": "tsuki:orange_juice"
+    },
+    {
+      "item": "monstergirl:life_fruit"
+    },
+    {
+      "item": "monstergirl:soul_tether_berry"
+    },
+    {
+      "item": "monstergirl:dream_weave_berry"
+    },
+    {
+      "item": "monstergirl:halved_coconut"
+    },
+    {
+      "item": "yeastnfeast:elderberries"
+    },
+    {
+      "item": "yeastnfeast:rose_hips"
+    },
+    {
+      "item": "yeastnfeast:lemon"
+    },
+    {
+      "item": "yeastnfeast:hawthorn_berries"
+    },
+    {
+      "item": "spawn:dates"
+    },
+    {
+      "item": "crabbersdelight:coconut_halve"
     }
   ]
 }

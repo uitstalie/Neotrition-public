@@ -1,6 +1,7 @@
 package com.uitstalie.nutrition.nutrition.util.data;
 
 import com.uitstalie.nutrition.nutrition.api.data.group.NutritionGroupJson;
+import com.uitstalie.nutrition.nutrition.util.log.Log;
 import net.minecraft.nbt.CompoundTag;
 
 import java.util.ArrayList;
@@ -102,6 +103,25 @@ class NutritionData {
  */
 public class NutritionDataStorage {
 
+    private static final String KEY_VERSION = "mod_version";
+
+    /**
+     * 生成当前数据包的版本指纹（来自 group 名称列表 + 各组 item 数量）。
+     * 数据包变化后自动改变，无需手动维护。
+     */
+    public static String computeCurrentVersion() {
+        try {
+            var groups = com.uitstalie.nutrition.nutrition.api.data.NutritionDataRegistry.groups();
+            StringBuilder sb = new StringBuilder();
+            for (var g : groups) {
+                sb.append(g.groupName).append("|");
+            }
+            return sb.toString();
+        } catch (Exception e) {
+            return "unknown";
+        }
+    }
+
     private final Map<String, NutritionData> groups = new LinkedHashMap<>();
 
     // ────────── 食用 ──────────
@@ -183,6 +203,7 @@ public class NutritionDataStorage {
 
     public CompoundTag serializeNBT() {
         CompoundTag root = new CompoundTag();
+        root.putString(KEY_VERSION, computeCurrentVersion());
         CompoundTag groupsTag = new CompoundTag();
         for (Map.Entry<String, NutritionData> entry : groups.entrySet()) {
             CompoundTag dataTag = new CompoundTag();
@@ -194,6 +215,14 @@ public class NutritionDataStorage {
     }
 
     public void deserializeNBT(CompoundTag root) {
+        String savedVersion = root.getString(KEY_VERSION);
+        String currentVersion = computeCurrentVersion();
+        if (!savedVersion.isEmpty() && !savedVersion.equals(currentVersion)) {
+            Log.w("NutritionData", "Data pack changed since last save! "
+                    + "Saved groups: [" + savedVersion + "] "
+                    + "Current groups: [" + currentVersion + "] "
+                    + "Nutrition data for removed groups will be orphaned.");
+        }
         groups.clear();
         if (!root.contains("groups")) return;
         CompoundTag groupsTag = root.getCompound("groups");

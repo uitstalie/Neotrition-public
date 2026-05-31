@@ -36,6 +36,24 @@
     },
     {
       "item": "croptopia:sweetpotato"
+    },
+    {
+      "item": "tsuki:buckwheat_bread"
+    },
+    {
+      "item": "tsuki:raw_taiyaki"
+    },
+    {
+      "item": "tsuki:taiyaki"
+    },
+    {
+      "item": "tsuki:taiyaki_mocha"
+    },
+    {
+      "item": "croptopia:tuna_sandwich"
+    },
+    {
+      "item": "croptopia:cheese_cake"
     }
   ]
 }

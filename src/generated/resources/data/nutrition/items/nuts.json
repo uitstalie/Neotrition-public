@@ -21,6 +21,15 @@
     },
     {
       "item": "croptopia:walnut"
+    },
+    {
+      "item": "tsuki:almond"
+    },
+    {
+      "item": "tsuki:chestnut_toasted"
+    },
+    {
+      "item": "spawn:roasted_sunflower_seeds"
     }
   ]
 }

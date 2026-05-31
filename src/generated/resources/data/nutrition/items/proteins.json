@@ -42,6 +42,45 @@
     },
     {
       "item": "farmersdelight:ham"
+    },
+    {
+      "item": "alexsmobs:maggot"
+    },
+    {
+      "item": "alexsmobs:moose_ribs"
+    },
+    {
+      "item": "alexsmobs:kangaroo_meat"
+    },
+    {
+      "item": "alexsmobs:shrimp_fried_rice"
+    },
+    {
+      "item": "croptopia:fried_frog_legs"
+    },
+    {
+      "item": "exdeorum:cooked_silkworm"
+    },
+    {
+      "item": "earthmobsmod:harder_flesh"
+    },
+    {
+      "item": "crabbersdelight:raw_frog_leg"
+    },
+    {
+      "item": "crabbersdelight:jar_of_pickles"
+    },
+    {
+      "item": "spawn:dodo"
+    },
+    {
+      "item": "tsuki:minced_meat"
+    },
+    {
+      "item": "tsuki:hydra_ramen"
+    },
+    {
+      "item": "minecraft:spider_eye"
     }
   ]
 }

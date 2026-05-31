@@ -468,6 +468,72 @@
     },
     {
       "item": "croptopia:tuna"
+    },
+    {
+      "item": "crabbersdelight:crab"
+    },
+    {
+      "item": "crabbersdelight:clawster"
+    },
+    {
+      "item": "crabbersdelight:shrimp"
+    },
+    {
+      "item": "crabbersdelight:raw_clam_meat"
+    },
+    {
+      "item": "crabbersdelight:raw_squid_tentacles"
+    },
+    {
+      "item": "crabbersdelight:raw_glow_squid_tentacles"
+    },
+    {
+      "item": "crabbersdelight:crab_legs"
+    },
+    {
+      "item": "alexsmobs:lobster_tail"
+    },
+    {
+      "item": "alexsmobs:raw_catfish"
+    },
+    {
+      "item": "alexsmobs:blobfish"
+    },
+    {
+      "item": "alexsmobs:flying_fish"
+    },
+    {
+      "item": "alexsmobs:cosmic_cod"
+    },
+    {
+      "item": "alexsmobs:rainbow_jelly"
+    },
+    {
+      "item": "aquaculturedelight:small_turtle_meat"
+    },
+    {
+      "item": "tsuki:shrimp"
+    },
+    {
+      "item": "tsuki:bonito"
+    },
+    {
+      "item": "spawn:angler_fish"
+    },
+    {
+      "item": "spawn:herring"
+    },
+    {
+      "item": "spawn:bluefish"
+    },
+    {
+      "item": "spawn:tuna_chunk"
+    },
+    {
+      "item": "spawn:tuna_slice"
+    },
+    {
+      "item": "spawn:cooked_clam"
     }
   ]
 }

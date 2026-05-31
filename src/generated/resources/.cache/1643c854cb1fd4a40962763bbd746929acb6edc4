@@ -1,16 +1,16 @@
-// 1.21.1	2026-05-29T23:18:18.735333553	items generator for nutrition
-3c1aea23312f8cdae974dc0801ef27b1717740af data/nutrition/items/coffee.json
-4bf2409765f7d7b168c2fe4c728b3b48e6f702cb data/nutrition/items/eggs.json
-9149fbbdef267f2641f28faf871ae6441e6d2c8c data/nutrition/items/fishs.json
-33a6db7f36de7551976fc3f6e3c122458f037afe data/nutrition/items/fruits.json
-a7ba013b325c6f3be2ad653485379b69d0d9b6f1 data/nutrition/items/grains.json
+// 1.21.1	2026-05-31T13:40:46.791928148	items generator for nutrition
+3f16fa3504be283be2a5a154d307af3fd8f88570 data/nutrition/items/coffee.json
+f8386190919978ddb00072a471f3666565410814 data/nutrition/items/eggs.json
+11a41a5b0f9fc4c6dee71855b4bc426eb5ad35cd data/nutrition/items/fishs.json
+928d4fc5ebfaf7a45981234e563a46ab960c3f5c data/nutrition/items/fruits.json
+e677ff94f3b8e1b4458eb89f77c026be3b375ddf data/nutrition/items/grains.json
 71c68e6824e7db40fb34294441ab843435377f4d data/nutrition/items/honeys.json
-b6290d8c50d047c16d0bb8e0c61f215f321361d4 data/nutrition/items/milks.json
-a62dbc51cb6395a4c6845b8aa9b3519834af7a38 data/nutrition/items/mushrooms.json
-b08c450e6987bedb3125c21ffc11023a3042c7eb data/nutrition/items/nuts.json
-32fdd55085af4f49fd489bdd050f5a87617d1e91 data/nutrition/items/proteins.json
+8db741bccc2449e7198aa1988484c6087b8d2e9e data/nutrition/items/milks.json
+d85e4611084a6ed5d9adfbad5c0ddae84ac38b84 data/nutrition/items/mushrooms.json
+5873e6402714bf6bbd8cd3514b0a6f8532718f58 data/nutrition/items/nuts.json
+832b6b49e9bd4f65ad55aff9f35441f946a7eccc data/nutrition/items/proteins.json
 30d97f370d573413adcf21ebae6f3bdd86e92d97 data/nutrition/items/salt.json
-4a4be1777de1347d40262a716e1482b36075db78 data/nutrition/items/sugars.json
-a850a12aa0f957f4963b410ef218134a71007318 data/nutrition/items/trace_elements.json
-755d9dda893d7e53ef6584e0743d1328811bd6e5 data/nutrition/items/vegetables.json
+134f13fb20a4ea3d470abcfecb0bba093ddb129d data/nutrition/items/sugars.json
+dbf1da164e1e1973803a7d56b42311f7cffa04c8 data/nutrition/items/trace_elements.json
+61c20f5713b28c7f8455ca93d9de4873d188181d data/nutrition/items/vegetables.json
 ed2283561db9aea03ece344f40a2cb6f78948a3b data/nutrition/items/wines.json

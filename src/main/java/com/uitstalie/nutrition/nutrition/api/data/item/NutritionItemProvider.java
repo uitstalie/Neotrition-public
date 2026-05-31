@@ -35,7 +35,24 @@ public class NutritionItemProvider extends JsonCodecProvider<NutritionItemJson> 
                 e("minecraft:rotten_flesh"),
                 // mod seeds
                 e("croptopia:frog_legs"), e("croptopia:raw_ravager_meat"),
-                e("farmersdelight:ham")
+                e("farmersdelight:ham"),
+                // alexsmobs
+                e("alexsmobs:maggot"), e("alexsmobs:moose_ribs"),
+                e("alexsmobs:kangaroo_meat"),                 e("alexsmobs:shrimp_fried_rice"),
+                // croptopia
+                e("croptopia:fried_frog_legs"),
+                // exdeorum
+                e("exdeorum:cooked_silkworm"),
+                // earthmobsmod
+                e("earthmobsmod:harder_flesh"),
+                // crabbersdelight
+                e("crabbersdelight:raw_frog_leg"), e("crabbersdelight:jar_of_pickles"),
+                // spawn
+                e("spawn:dodo"),
+                // tsuki (processed, no FoodProperties)
+                e("tsuki:minced_meat"), e("tsuki:hydra_ramen"),
+                // minecraft (双开 proteins + trace_elements)
+                e("minecraft:spider_eye")
         ));
 
         // ============================================================
@@ -43,7 +60,10 @@ public class NutritionItemProvider extends JsonCodecProvider<NutritionItemJson> 
         // ============================================================
         add("eggs", List.of(
                 e("minecraft:egg"),
-                e("farmersdelight:fried_egg")
+                e("farmersdelight:fried_egg"),
+                e("alexsmobs:boiled_emu_egg"),
+                // spawn (双开 proteins + eggs)
+                e("spawn:dodo")
         ));
 
         // ============================================================
@@ -113,7 +133,23 @@ public class NutritionItemProvider extends JsonCodecProvider<NutritionItemJson> 
                 // croptopia fish/seafood (9)
                 e("croptopia:anchovy"), e("croptopia:calamari"), e("croptopia:clam"),
                 e("croptopia:crab"), e("croptopia:glowing_calamari"), e("croptopia:oyster"),
-                e("croptopia:roe"), e("croptopia:shrimp"), e("croptopia:tuna")
+                e("croptopia:roe"), e("croptopia:shrimp"), e("croptopia:tuna"),
+                // crabbersdelight raw seafood mob-drops (7)
+                e("crabbersdelight:crab"), e("crabbersdelight:clawster"),
+                e("crabbersdelight:shrimp"), e("crabbersdelight:raw_clam_meat"),
+                e("crabbersdelight:raw_squid_tentacles"), e("crabbersdelight:raw_glow_squid_tentacles"),
+                e("crabbersdelight:crab_legs"),
+                // alexsmobs fish mob-drops (4)
+                e("alexsmobs:lobster_tail"), e("alexsmobs:raw_catfish"),
+                e("alexsmobs:blobfish"), e("alexsmobs:flying_fish"),
+                e("alexsmobs:cosmic_cod"), e("alexsmobs:rainbow_jelly"),
+                // aquaculturedelight turtle
+                e("aquaculturedelight:small_turtle_meat"),
+                // tsuki fish/seafood
+                e("tsuki:shrimp"), e("tsuki:bonito"),
+                // spawn fish/seafood
+                e("spawn:angler_fish"), e("spawn:herring"), e("spawn:bluefish"),
+                e("spawn:tuna_chunk"), e("spawn:tuna_slice"), e("spawn:cooked_clam")
         ));
 
         // ============================================================
@@ -137,7 +173,30 @@ public class NutritionItemProvider extends JsonCodecProvider<NutritionItemJson> 
                 e("croptopia:peach"), e("croptopia:pear"), e("croptopia:persimmon"),
                 e("croptopia:pineapple"), e("croptopia:plum"), e("croptopia:raspberry"),
                 e("croptopia:rhubarb"), e("croptopia:saguaro"), e("croptopia:starfruit"),
-                e("croptopia:strawberry")
+                e("croptopia:strawberry"),
+                // alexsmobs
+                e("alexsmobs:banana"),
+                // silentgear
+                e("silentgear:nether_banana"),
+                // regions_unexplored
+                e("regions_unexplored:salmonberry"), e("regions_unexplored:duskmelon_slice"),
+                e("regions_unexplored:hanging_earlight_fruit"),
+                // tsuki
+                e("tsuki:grape"), e("tsuki:grape_green"), e("tsuki:ume"),
+                e("tsuki:lemon"), e("tsuki:lime"),
+                // tsuki drinks (no FoodProperties, derived from fruits)
+                e("tsuki:lemon_juice"), e("tsuki:lime_juice"), e("tsuki:cola"),
+                e("tsuki:blackcurrant_juice"), e("tsuki:orange_juice"),
+                // monstergirl
+                e("monstergirl:life_fruit"), e("monstergirl:soul_tether_berry"),
+                e("monstergirl:dream_weave_berry"), e("monstergirl:halved_coconut"),
+                // yeastnfeast
+                e("yeastnfeast:elderberries"), e("yeastnfeast:rose_hips"),
+                e("yeastnfeast:lemon"), e("yeastnfeast:hawthorn_berries"),
+                // spawn
+                e("spawn:dates"),
+                // crabbersdelight
+                e("crabbersdelight:coconut_halve")
         ));
 
         // ============================================================
@@ -150,7 +209,12 @@ public class NutritionItemProvider extends JsonCodecProvider<NutritionItemJson> 
                 e("minecraft:pumpkin_pie"),
                 // croptopia grains
                 e("croptopia:barley"), e("croptopia:corn"), e("croptopia:oat"),
-                e("croptopia:rice"), e("croptopia:sweetpotato")
+                e("croptopia:rice"), e("croptopia:sweetpotato"),
+                // tsuki (processed, no FoodProperties)
+                e("tsuki:buckwheat_bread"), e("tsuki:raw_taiyaki"),
+                e("tsuki:taiyaki"), e("tsuki:taiyaki_mocha"),
+                // croptopia (processed, no FoodProperties)
+                e("croptopia:tuna_sandwich"), e("croptopia:cheese_cake")
         ));
 
         // ============================================================
@@ -168,7 +232,11 @@ public class NutritionItemProvider extends JsonCodecProvider<NutritionItemJson> 
                 e("minecraft:milk_bucket"),
                 // yeastnfeast cheeses
                 e("yeastnfeast:cheese_slice"), e("yeastnfeast:duskwheel_slice"),
-                e("yeastnfeast:freshwheel_slice"), e("yeastnfeast:sharpwheel_slice")
+                e("yeastnfeast:freshwheel_slice"), e("yeastnfeast:sharpwheel_slice"),
+                // monstergirl
+                e("monstergirl:milk_bottle"),
+                // croptopia (processed, no FoodProperties)
+                e("croptopia:cheese_cake")
         ));
 
         // ============================================================
@@ -177,7 +245,11 @@ public class NutritionItemProvider extends JsonCodecProvider<NutritionItemJson> 
         add("mushrooms", List.of(
                 e("minecraft:red_mushroom"), e("minecraft:brown_mushroom"),
                 e("minecraft:mushroom_stew"), e("minecraft:beetroot_soup"),
-                e("minecraft:rabbit_stew"), e("minecraft:suspicious_stew")
+                e("minecraft:rabbit_stew"), e("minecraft:suspicious_stew"),
+                // alexsmobs
+                e("alexsmobs:gongylidia"),
+                // tsuki
+                e("tsuki:matsutake"), e("tsuki:edodes"), e("tsuki:shimeji")
         ));
 
         // ============================================================
@@ -188,7 +260,12 @@ public class NutritionItemProvider extends JsonCodecProvider<NutritionItemJson> 
                 e("minecraft:cocoa_beans"),
                 // croptopia nuts
                 e("croptopia:almond"), e("croptopia:cashew"), e("croptopia:nutmeg"),
-                e("croptopia:peanut"), e("croptopia:pecan"), e("croptopia:walnut")
+                e("croptopia:peanut"), e("croptopia:pecan"), e("croptopia:walnut"),
+                // tsuki
+                e("tsuki:almond"),
+                e("tsuki:chestnut_toasted"),
+                // spawn
+                e("spawn:roasted_sunflower_seeds")
         ));
 
         // ============================================================
@@ -203,7 +280,8 @@ public class NutritionItemProvider extends JsonCodecProvider<NutritionItemJson> 
         // ============================================================
         add("sugars", List.of(
                 e("minecraft:sugar"), e("minecraft:sugar_cane"),
-                e("yeastnfeast:maple_syrup")
+                e("yeastnfeast:maple_syrup"),
+                e("create:bar_of_chocolate")
         ));
 
         // ============================================================
@@ -217,7 +295,14 @@ public class NutritionItemProvider extends JsonCodecProvider<NutritionItemJson> 
                 e("minecraft:poisonous_potato"),
                 // farmersdelight base veggies
                 e("farmersdelight:cabbage"), e("farmersdelight:tomato"),
-                e("farmersdelight:onion"),
+                e("farmersdelight:onion"), e("farmersdelight:pumpkin_slice"),
+                // regions_unexplored
+                e("regions_unexplored:meadow_sage"),
+                // tsuki veggies
+                e("tsuki:taro"), e("tsuki:tomato"), e("tsuki:radish"),
+                e("tsuki:eggplant"), e("tsuki:cabbage"), e("tsuki:onion"),
+                // yeastnfeast
+                e("yeastnfeast:ginger"), e("yeastnfeast:garlic"),
                 // croptopia vegetables (35)
                 e("croptopia:artichoke"), e("croptopia:asparagus"), e("croptopia:basil"),
                 e("croptopia:bellpepper"), e("croptopia:blackbean"), e("croptopia:broccoli"),
@@ -237,7 +322,8 @@ public class NutritionItemProvider extends JsonCodecProvider<NutritionItemJson> 
         // coffee — 咖啡
         // ============================================================
         add("coffee", List.of(
-                e("croptopia:coffee_beans")
+                e("croptopia:coffee_beans"),
+                e("silentgems:cup_of_coffee")
         ));
 
         // ============================================================
@@ -269,7 +355,9 @@ public class NutritionItemProvider extends JsonCodecProvider<NutritionItemJson> 
                 // silent gems — gemstones
                 e("silentgems:ruby"), e("silentgems:sapphire"),
                 e("silentgems:topaz"), e("silentgems:opal"),
-                e("silentgems:amber"), e("silentgems:carnelian")
+                e("silentgems:amber"), e("silentgems:carnelian"),
+                // minecraft (双开 proteins + trace_elements)
+                e("minecraft:spider_eye")
         ));
     }
 
