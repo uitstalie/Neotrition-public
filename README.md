@@ -1,4 +1,4 @@
-# Nutrition 🍎
+# Neotrition 🍎
 
 [![Minecraft](https://img.shields.io/badge/Minecraft-1.21.1-80ba42?logo=minecraft)](https://minecraft.net)
 [![NeoForge](https://img.shields.io/badge/NeoForge-21.1-f16436)](https://neoforged.net)
@@ -33,11 +33,11 @@
 
 | 命令 | 说明 |
 |------|------|
-| `/nutrition set <组> <值>` | 设置营养值（0–100000） |
-| `/nutrition get <组>` | 查看当前营养值 |
-| `/nutrition list` | 列出所有营养组及数值 |
-| `/nutrition autogen` | 运行 BFS 自动生成 |
-| `/nutrition find-seeds` | 查找最小标记物品集合 |
+| `/neotrition set <组> <值>` | 设置营养值（0–100000） |
+| `/neotrition get <组>` | 查看当前营养值 |
+| `/neotrition list` | 列出所有营养组及数值 |
+| `/neotrition autogen` | 运行 BFS 自动生成 |
+| `/neotrition find-seeds` | 查找最小标记物品集合 |
 
 ## 📊 营养组
 
@@ -82,10 +82,10 @@
 创建自定义数据包来添加或修改配置：
 
 ```
-data/nutrition/config/config.json    — 全局设置（频率、营养值公式）
-data/nutrition/groups/<组>.json      — 营养组定义
-data/nutrition/items/<组>.json       — 物品-组绑定及手动值
-data/nutrition/effects/default.json  — 效果规则（AND/OR 条件）
+data/neotrition/config/config.json    — 全局设置（频率、营养值公式）
+data/neotrition/groups/<组>.json      — 营养组定义
+data/neotrition/items/<组>.json       — 物品-组绑定及手动值
+data/neotrition/effects/default.json  — 效果规则（AND/OR 条件）
 ```
 
 详见 [Wiki](https://github.com/uitstalie/Neotrition-public/wiki) 配置参考。
