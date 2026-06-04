@@ -1,9 +1,0 @@
-{
-  "decay_frequency": 3,
-  "decay_pressure": 2.0,
-  "decay_value": 5,
-  "group_icon": "minecraft:iron_ingot",
-  "group_name": "trace_elements",
-  "gui_png_color": "#FF8899AA",
-  "gui_text_color": "#FF8899AA"
-}

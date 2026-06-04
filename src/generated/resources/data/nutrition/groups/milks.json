@@ -1,9 +1,0 @@
-{
-  "decay_frequency": 3,
-  "decay_pressure": 2.0,
-  "decay_value": 5,
-  "group_icon": "minecraft:milk_bucket",
-  "group_name": "milks",
-  "gui_png_color": "#FFFFFFFF",
-  "gui_text_color": "#FFFFFFFF"
-}

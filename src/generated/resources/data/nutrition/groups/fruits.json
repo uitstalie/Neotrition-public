@@ -1,9 +1,0 @@
-{
-  "decay_frequency": 3,
-  "decay_pressure": 2.0,
-  "decay_value": 5,
-  "group_icon": "minecraft:apple",
-  "group_name": "fruits",
-  "gui_png_color": "#FFFF5555",
-  "gui_text_color": "#FFFF5555"
-}

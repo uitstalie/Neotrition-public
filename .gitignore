@@ -15,6 +15,9 @@ run/
 logs/
 .gradle/
 
+# DataGen 缓存
+src/generated/resources/.cache/
+
 # IDE
 .idea/
 *.iml

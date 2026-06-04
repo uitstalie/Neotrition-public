@@ -1,9 +1,0 @@
-{
-  "decay_frequency": 3,
-  "decay_pressure": 2.0,
-  "decay_value": 5,
-  "group_icon": "minecraft:cooked_beef",
-  "group_name": "proteins",
-  "gui_png_color": "#FFFF4444",
-  "gui_text_color": "#FFFF4444"
-}
