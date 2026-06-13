@@ -1,11 +1,13 @@
 package com.uitstalie.neotrition.api.data.item;
 
+import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
 /**
  * 营养组物品绑定配置（data/neotrition/items/{group_name}.json）。
@@ -26,64 +28,65 @@ import java.util.Optional;
  */
 public class NutritionItemJson {
 
-    /** 营养组名（对应 groups/ 下的 group_name）。 */
-    public final String groups;
+    /** 营养组名（对应 groups/ 下的 group_name，JSON 键为 "groups"）。 */
+    public final String group;
     /** 该组下的物品列表。 */
     public final List<ItemEntry> items;
 
-    public NutritionItemJson(String groups, List<ItemEntry> items) {
-        this.groups = groups;
+    public NutritionItemJson(String group, List<ItemEntry> items) {
+        this.group = group;
         this.items = items;
     }
 
     public static final Codec<NutritionItemJson> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Codec.STRING.fieldOf("groups").forGetter(c -> c.groups),
+            Codec.STRING.fieldOf("groups").forGetter(c -> c.group),
             Codec.list(ItemEntry.CODEC).fieldOf("items").forGetter(c -> c.items)
     ).apply(instance, NutritionItemJson::new));
 
     /**
      * 单个物品项。
      *
+     * <p>支持三种 JSON 格式：</p>
+     * <ul>
+     *   <li>{@code "minecraft:apple"} — 字符串简写，无手动值，走公式</li>
+     *   <li>{@code {"item": "minecraft:apple"}} — 对象，无手动值，走公式</li>
+     *   <li>{@code {"item": "minecraft:apple", "value": 3000}} — 对象，有手动值</li>
+     * </ul>
+     *
      * @param item  物品 ID（如 minecraft:apple）
      * @param value 手动营养值，null 表示走公式
      */
     public record ItemEntry(String item, @Nullable Integer value) {
 
-        public static final Codec<ItemEntry> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+        /** 对象格式 Codec（item + 可选 value）。 */
+        private static final Codec<ItemEntry> OBJECT_CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 Codec.STRING.fieldOf("item").forGetter(ItemEntry::item),
                 Codec.INT.optionalFieldOf("value").forGetter(e -> Optional.ofNullable(e.value))
         ).apply(instance, (item, valueOpt) -> new ItemEntry(item, valueOpt.orElse(null))));
+
+        /** 字符串格式 Codec："minecraft:apple" → ItemEntry("minecraft:apple", null) */
+        private static final Codec<ItemEntry> STRING_CODEC = Codec.STRING.xmap(
+                s -> new ItemEntry(s, null), ItemEntry::item);
+
+        /**
+         * 统一 Codec：字符串简写或对象格式。
+         * <p>解码时优先尝试字符串，失败回退对象。编码时无 value 输出字符串，有 value 输出对象。</p>
+         */
+        public static final Codec<ItemEntry> CODEC = Codec.either(STRING_CODEC, OBJECT_CODEC)
+                .xmap(
+                        either -> either.map(Function.identity(), Function.identity()),
+                        entry -> entry.hasManualValue()
+                                ? Either.right(entry)
+                                : Either.left(entry)
+                );
 
         public boolean hasManualValue() {
             return value != null;
         }
     }
 
-    /**
-     * 查找指定物品在该组中的手动值。
-     *
-     * @return 手动值，未配置返回 null
-     */
-    @Nullable
-    public Integer getManualValue(String itemId) {
-        for (ItemEntry entry : items) {
-            if (entry.item().equals(itemId) && entry.hasManualValue()) {
-                return entry.value();
-            }
-        }
-        return null;
-    }
-
-    /** 检查该组是否包含指定物品。 */
-    public boolean containsItem(String itemId) {
-        for (ItemEntry entry : items) {
-            if (entry.item().equals(itemId)) return true;
-        }
-        return false;
-    }
-
     public boolean isValid() {
-        return groups != null && !groups.isBlank()
+        return group != null && !group.isBlank()
                 && items != null && !items.isEmpty();
     }
 }

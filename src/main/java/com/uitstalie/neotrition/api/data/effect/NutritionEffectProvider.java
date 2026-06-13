@@ -69,6 +69,12 @@ public class NutritionEffectProvider extends JsonCodecProvider<NutritionEffectJs
         // === AND 组合：幸运之神 → luck II ===
         var luck2And50k = multiMatch4(NutritionEffectJson.Predict.AND,
                 "honeys", 50000, "sugars", 50000, "wines", 50000, "trace_elements", 50000);
+        // === NOT 示例：核心营养全缺 → 虚弱 + 缓慢 ===
+        var deficientNot25k = new NutritionEffectJson.Match(NutritionEffectJson.Predict.NOT, List.of(
+                new NutritionEffectJson.Prediction("proteins", new ValueRange(25000, 100000)),
+                new NutritionEffectJson.Prediction("fishs", new ValueRange(25000, 100000)),
+                new NutritionEffectJson.Prediction("mushrooms", new ValueRange(25000, 100000))
+        ));
 
         NutritionEffectJson def = new NutritionEffectJson(List.of(
                 entryAttr(healthOr25k,     att("max_health", 5, ADD)),
@@ -85,7 +91,11 @@ public class NutritionEffectProvider extends JsonCodecProvider<NutritionEffectJs
                 entry(regenOr20k, ef("regeneration", 0)),
                 entry(speedAnd50k, ef("speed", 1)),
                 entry(satAnd50k, ef("saturation", 0)),
-                entry(luck2And50k, ef("luck", 1))
+                entry(luck2And50k, ef("luck", 1)),
+                // NOT 示例：核心营养全缺 → 虚弱 + 缓慢
+                new NutritionEffectJson.CombinedEntry(deficientNot25k,
+                        List.of(ef("weakness", 0), ef("slowness", 0)),
+                        List.of())
         ));
 
         this.unconditional(

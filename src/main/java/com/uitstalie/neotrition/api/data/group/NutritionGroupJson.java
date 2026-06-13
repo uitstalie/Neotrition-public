@@ -33,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
  *   <li><b>gui_text_color</b> — GUI 文字颜色，十六进制 {@code #AARRGGBB}，默认白色。</li>
  *   <li><b>gui_png_color</b> — GUI 贴图颜色，默认白色。</li>
  *   <li><b>decay_value</b> — 每次衰减扣减值，默认 0（不衰减）。</li>
- *   <li><b>decay_frequency</b> — 衰减间隔（Ticker 回调次数）。1=每次扣，3=每 3 次扣。默认 1。</li>
+ *   <li><b>decay_frequency</b> — 衰减间隔（second event 回调次数）。1=每次扣，3=每 3 次扣。默认 1。</li>
  *   <li><b>decay_pressure</b> — 衰减压力指数。越接近满值衰减越重，公式: 有效衰减 = decay_value × (1 + (value/100k)^pressure)。0=无压力。默认 0。</li>
  *   <li><b>value_formula</b> — 该组独立公式，null 时走全局配置。</li>
  * </ul>
@@ -50,7 +50,7 @@ public class NutritionGroupJson {
     public final Color guiPngColor;
     /** 每次衰减扣减值。 */
     public final int decayValue;
-    /** 衰减间隔（Ticker 回调次数）。 */
+    /** 衰减间隔（second event 回调次数）。 */
     public final int decayFrequency;
     /** 衰减压力指数：值越接近满值，实际衰减越重。0=无压力。 */
     public final double decayPressure;

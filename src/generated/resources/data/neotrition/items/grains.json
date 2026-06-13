@@ -1,59 +1,23 @@
 {
   "groups": "grains",
   "items": [
-    {
-      "item": "minecraft:bread"
-    },
-    {
-      "item": "minecraft:wheat"
-    },
-    {
-      "item": "minecraft:cake"
-    },
-    {
-      "item": "minecraft:cookie"
-    },
-    {
-      "item": "minecraft:potato"
-    },
-    {
-      "item": "minecraft:baked_potato"
-    },
-    {
-      "item": "minecraft:pumpkin_pie"
-    },
-    {
-      "item": "croptopia:barley"
-    },
-    {
-      "item": "croptopia:corn"
-    },
-    {
-      "item": "croptopia:oat"
-    },
-    {
-      "item": "croptopia:rice"
-    },
-    {
-      "item": "croptopia:sweetpotato"
-    },
-    {
-      "item": "tsuki:buckwheat_bread"
-    },
-    {
-      "item": "tsuki:raw_taiyaki"
-    },
-    {
-      "item": "tsuki:taiyaki"
-    },
-    {
-      "item": "tsuki:taiyaki_mocha"
-    },
-    {
-      "item": "croptopia:tuna_sandwich"
-    },
-    {
-      "item": "croptopia:cheese_cake"
-    }
+    "minecraft:bread",
+    "minecraft:wheat",
+    "minecraft:cake",
+    "minecraft:cookie",
+    "minecraft:potato",
+    "minecraft:baked_potato",
+    "minecraft:pumpkin_pie",
+    "croptopia:barley",
+    "croptopia:corn",
+    "croptopia:oat",
+    "croptopia:rice",
+    "croptopia:sweetpotato",
+    "tsuki:buckwheat_bread",
+    "tsuki:raw_taiyaki",
+    "tsuki:taiyaki",
+    "tsuki:taiyaki_mocha",
+    "croptopia:tuna_sandwich",
+    "croptopia:cheese_cake"
   ]
 }

@@ -19,7 +19,7 @@ import java.util.List;
  * </ul>
  *
  * <h3>线程模型</h3>
- * 仅在服务端 Ticker 回调中单线程访问，无需额外同步。
+ * 仅在服务端 per-player second event 回调中单线程访问，无需额外同步。
  */
 public class FoodRecordWindow {
 

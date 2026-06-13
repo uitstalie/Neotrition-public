@@ -14,7 +14,7 @@ import java.util.Map;
  *
  * <h3>衰减语义</h3>
  * <ol>
- *   <li>每次 Ticker 回调时，decayCountdown 递减 1。</li>
+ *   <li>每次 second event 回调时，decayCountdown 递减 1。</li>
  *   <li>归零时扣除 decayValue，重置 countdown = decayFrequency。</li>
  * </ol>
  */
@@ -25,7 +25,7 @@ class NutritionData {
 
     /** 当前营养值（0–100 000）。 */
     int value;
-    /** 距下一次衰减还剩余几个 Ticker 回调。 */
+    /** 距下一次衰减还剩余几个 second event 回调。 */
     int decayCountdown;
 
     NutritionData() {
@@ -51,7 +51,7 @@ class NutritionData {
      * 执行一次衰减推进。
      *
      * @param decayValue     每次扣减值
-     * @param decayFrequency 衰减间隔（Ticker 回调次数）
+     * @param decayFrequency 衰减间隔（second event 回调次数）
      * @param decayPressure  压力指数：实际衰减 = decayValue × (1 + (value/max)^pressure)
      * @return true 表示本次发生了衰减扣减
      */
@@ -99,7 +99,7 @@ class NutritionData {
  * 玩家所有营养组的聚合存储，负责营养值的存取和批量衰减。
  *
  * <h3>线程模型</h3>
- * 仅在服务端 Ticker 回调中单线程访问，无需额外同步。
+ * 仅在服务端 per-player second event 回调中单线程访问，无需额外同步。
  */
 public class NutritionDataStorage {
 
@@ -165,7 +165,7 @@ public class NutritionDataStorage {
 
     /**
      * 对所有营养组执行一次衰减。
-     * 由 Ticker second event 回调直接调用。
+     * 由 second event 回调直接调用。
      *
      * @param allGroups 所有已注册的营养组配置
      */

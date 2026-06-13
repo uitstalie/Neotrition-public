@@ -23,7 +23,7 @@ import java.util.Map;
  *
  * <h3>生命周期</h3>
  * <ul>
- *   <li>{@link #REFRESH_INTERVAL_SECONDS} 秒一次全量重算（由 Ticker 驱动）</li>
+ *   <li>{@link #REFRESH_INTERVAL_SECONDS} 秒一次全量重算（由 per-player tick 驱动）</li>
  *   <li>effect：duration {@link #EFFECT_DURATION_TICKS} tick，条件命中时刷新，
  *       条件不命中时不主动移除，由原版自然过期</li>
  *   <li>attribute：条件命中时施加 modifier，不命中时主动移除，

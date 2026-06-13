@@ -7,8 +7,8 @@ import java.util.Map;
 /**
  * 表达式求值器：解析并计算 {@code value_formula} 表达式。
  *
- * <p>支持：四则运算 + 括号，变量 {@code healing} (int) 和 {@code saturation} (float)。
- * 标准数学优先级（* / 高于 + -），全程 double 运算，最终 {@code (int) floor} 截断。</p>
+ * <p>支持：四则运算 + 括号 + 幂运算（{@code ^}），变量 {@code healing} (int) 和 {@code saturation} (float)。
+ * 标准数学优先级（{@code ^} 高于 {@code * /} 高于 {@code + -}），{@code ^} 右结合，全程 double 运算，最终 {@code (int) floor} 截断。</p>
  *
  * <h3>错误处理</h3>
  * <ul>
@@ -52,13 +52,24 @@ public final class ValueFormulaEvaluator {
     }
 
     private static Expr parseTerm(Tokenizer tokens) {
-        Expr left = parseFactor(tokens);
+        Expr left = parsePower(tokens);
         while (tokens.hasNext() && tokens.peek().isOp('*', '/')) {
             Token op = tokens.next();
-            Expr right = parseFactor(tokens);
+            Expr right = parsePower(tokens);
             left = new BinaryExpr(left, op, right);
         }
         return left;
+    }
+
+    /** 幂运算：右结合，优先级高于 * /。 */
+    private static Expr parsePower(Tokenizer tokens) {
+        Expr base = parseFactor(tokens);
+        if (tokens.hasNext() && tokens.peek().isOp('^')) {
+            tokens.next(); // consume '^'
+            Expr exponent = parsePower(tokens); // right-associative recursion
+            return new BinaryExpr(base, new Token(TokenType.OP, "^"), exponent);
+        }
+        return base;
     }
 
     private static Expr parseFactor(Tokenizer tokens) {
@@ -123,6 +134,7 @@ public final class ValueFormulaEvaluator {
                 case "+" -> l + r;
                 case "-" -> l - r;
                 case "*" -> l * r;
+                case "^" -> Math.pow(l, r);
                 case "/" -> {
                     if (r == 0) {
                         Log.w("Formula", "Division by zero in formula, divisor replaced with 1");
@@ -148,6 +160,7 @@ public final class ValueFormulaEvaluator {
         }
 
         boolean hasNext() {
+            if (peeked != null) return true;
             skipWhitespace();
             return pos < input.length();
         }

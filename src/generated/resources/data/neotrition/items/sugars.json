@@ -1,17 +1,9 @@
 {
   "groups": "sugars",
   "items": [
-    {
-      "item": "minecraft:sugar"
-    },
-    {
-      "item": "minecraft:sugar_cane"
-    },
-    {
-      "item": "yeastnfeast:maple_syrup"
-    },
-    {
-      "item": "create:bar_of_chocolate"
-    }
+    "minecraft:sugar",
+    "minecraft:sugar_cane",
+    "yeastnfeast:maple_syrup",
+    "create:bar_of_chocolate"
   ]
 }

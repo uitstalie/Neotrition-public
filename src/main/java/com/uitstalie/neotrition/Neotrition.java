@@ -12,7 +12,6 @@ import com.uitstalie.neotrition.registry.AttributeTypeRegistry;
 import com.uitstalie.neotrition.service.NutritionRuntimeService;
 import com.uitstalie.neotrition.service.NutritionAutoGenerateService;
 import com.uitstalie.neotrition.service.NutritionSyncService;
-import com.uitstalie.neotrition.util.ticker.Ticker;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -42,8 +41,6 @@ public class Neotrition {
         modEventBus.addListener(RegisterCapabilitiesEvent.class, NutritionCapabilities::attachCapabilityPlayer);
         modEventBus.addListener(RegisterPayloadHandlersEvent.class, NetworkPayloadHandler::register);
         AttributeTypeRegistry.register(modEventBus);
-
-        Ticker.addCallback(NutritionRuntimeService::onSecondEvent);
     }
 
     /**
@@ -52,6 +49,7 @@ public class Neotrition {
     @SubscribeEvent
     public void onRegisterCommands(RegisterCommandsEvent event) {
         NutritionCommand.register(event.getDispatcher());
+        // NutritionTestCommand.register(event.getDispatcher()); // hidden by default (v0.0.5), uncomment for testing
     }
 
     /**

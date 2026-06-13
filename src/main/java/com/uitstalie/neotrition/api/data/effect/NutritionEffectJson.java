@@ -74,7 +74,7 @@ public class NutritionEffectJson {
         public boolean hasAttributes() { return attributes != null && !attributes.isEmpty(); }
     }
 
-    /** 条件匹配结构。predict 定义 prediction 数组的匹配方式（AND/OR）。 */
+    /** 条件匹配结构。predict 定义 prediction 数组的匹配方式（AND/OR/NOT）。 */
     public record Match(Predict predict, List<Prediction> predictions) {
 
         public static final Codec<Match> CODEC = RecordCodecBuilder.create(instance -> instance.group(

@@ -1,35 +1,15 @@
 {
   "groups": "nuts",
   "items": [
-    {
-      "item": "minecraft:cocoa_beans"
-    },
-    {
-      "item": "croptopia:almond"
-    },
-    {
-      "item": "croptopia:cashew"
-    },
-    {
-      "item": "croptopia:nutmeg"
-    },
-    {
-      "item": "croptopia:peanut"
-    },
-    {
-      "item": "croptopia:pecan"
-    },
-    {
-      "item": "croptopia:walnut"
-    },
-    {
-      "item": "tsuki:almond"
-    },
-    {
-      "item": "tsuki:chestnut_toasted"
-    },
-    {
-      "item": "spawn:roasted_sunflower_seeds"
-    }
+    "minecraft:cocoa_beans",
+    "croptopia:almond",
+    "croptopia:cashew",
+    "croptopia:nutmeg",
+    "croptopia:peanut",
+    "croptopia:pecan",
+    "croptopia:walnut",
+    "tsuki:almond",
+    "tsuki:chestnut_toasted",
+    "spawn:roasted_sunflower_seeds"
   ]
 }

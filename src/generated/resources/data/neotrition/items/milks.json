@@ -1,26 +1,12 @@
 {
   "groups": "milks",
   "items": [
-    {
-      "item": "minecraft:milk_bucket"
-    },
-    {
-      "item": "yeastnfeast:cheese_slice"
-    },
-    {
-      "item": "yeastnfeast:duskwheel_slice"
-    },
-    {
-      "item": "yeastnfeast:freshwheel_slice"
-    },
-    {
-      "item": "yeastnfeast:sharpwheel_slice"
-    },
-    {
-      "item": "monstergirl:milk_bottle"
-    },
-    {
-      "item": "croptopia:cheese_cake"
-    }
+    "minecraft:milk_bucket",
+    "yeastnfeast:cheese_slice",
+    "yeastnfeast:duskwheel_slice",
+    "yeastnfeast:freshwheel_slice",
+    "yeastnfeast:sharpwheel_slice",
+    "monstergirl:milk_bottle",
+    "croptopia:cheese_cake"
   ]
 }

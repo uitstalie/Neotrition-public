@@ -4,8 +4,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.mojang.serialization.JsonOps;
-import com.uitstalie.neotrition.api.data.DataPackJsonLoader;
+import com.uitstalie.neotrition.util.data.ValueFormulaEvaluator;
 import com.uitstalie.neotrition.util.log.Log;
+import com.uitstalie.neotrition.service.NutritionRuntimeService;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
@@ -17,6 +18,9 @@ import java.util.Map;
 /**
  * 全局配置加载器。
  * 监听 {@code data/neotrition/config/} 目录。
+ *
+ * <p>设计上只期望一个 {@code config.json}，因此 {@code apply()} 解析成功第一个文件后即返回，
+ * 多余文件若发生同名冲突会被静默忽略。</p>
  */
 public class NutritionConfigDataListener extends SimpleJsonResourceReloadListener {
 
@@ -37,7 +41,14 @@ public class NutritionConfigDataListener extends SimpleJsonResourceReloadListene
                     Log.e("NutritionConfig", "Failed parsing config: " + entry.getKey() + " — " + error);
                     return new RuntimeException(error);
                 });
+
+                // Dry-run formula validation: catch syntax errors at load time, not at first food consumption
+                if (config.valueFormula != null && !config.valueFormula.isBlank()) {
+                    ValueFormulaEvaluator.evaluate(config.valueFormula, 1, 0.5f);
+                }
+
                 Log.d("NutritionConfig", "Loaded config: " + entry.getKey());
+                NutritionRuntimeService.refreshFrequency();
                 return;
             } catch (Exception e) {
                 Log.e("NutritionConfig", "Failed parsing config: " + entry.getKey() + " — " + e.getMessage());
@@ -47,21 +58,5 @@ public class NutritionConfigDataListener extends SimpleJsonResourceReloadListene
 
     public NutritionConfigJson getConfig() {
         return config;
-    }
-
-    /**
-     * 直接从 classpath 加载（绕过 ResourceManager reload）。
-     */
-    public void loadDirectly(String basePath, String fileName) {
-        String fullPath = "/" + basePath + "/" + fileName;
-        try {
-            JsonElement json = DataPackJsonLoader.loadJson(getClass(), "NutritionConfig", basePath, fileName);
-            if (json == null) return;
-            config = NutritionConfigJson.CODEC.parse(JsonOps.INSTANCE, json)
-                    .getOrThrow(error -> new RuntimeException("Parse error: " + error));
-            Log.d("NutritionConfig", "Loaded config directly from: " + fullPath);
-        } catch (Exception e) {
-            Log.e("NutritionConfig", "Failed loading " + fullPath + " — " + e.getMessage());
-        }
     }
 }

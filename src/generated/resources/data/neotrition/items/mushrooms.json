@@ -1,35 +1,15 @@
 {
   "groups": "mushrooms",
   "items": [
-    {
-      "item": "minecraft:red_mushroom"
-    },
-    {
-      "item": "minecraft:brown_mushroom"
-    },
-    {
-      "item": "minecraft:mushroom_stew"
-    },
-    {
-      "item": "minecraft:beetroot_soup"
-    },
-    {
-      "item": "minecraft:rabbit_stew"
-    },
-    {
-      "item": "minecraft:suspicious_stew"
-    },
-    {
-      "item": "alexsmobs:gongylidia"
-    },
-    {
-      "item": "tsuki:matsutake"
-    },
-    {
-      "item": "tsuki:edodes"
-    },
-    {
-      "item": "tsuki:shimeji"
-    }
+    "minecraft:red_mushroom",
+    "minecraft:brown_mushroom",
+    "minecraft:mushroom_stew",
+    "minecraft:beetroot_soup",
+    "minecraft:rabbit_stew",
+    "minecraft:suspicious_stew",
+    "alexsmobs:gongylidia",
+    "tsuki:matsutake",
+    "tsuki:edodes",
+    "tsuki:shimeji"
   ]
 }

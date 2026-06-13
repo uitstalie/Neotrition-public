@@ -1,17 +1,9 @@
 {
   "groups": "eggs",
   "items": [
-    {
-      "item": "minecraft:egg"
-    },
-    {
-      "item": "farmersdelight:fried_egg"
-    },
-    {
-      "item": "alexsmobs:boiled_emu_egg"
-    },
-    {
-      "item": "spawn:dodo"
-    }
+    "minecraft:egg",
+    "farmersdelight:fried_egg",
+    "alexsmobs:boiled_emu_egg",
+    "spawn:dodo"
   ]
 }

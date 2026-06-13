@@ -1,203 +1,71 @@
 {
   "groups": "fruits",
   "items": [
-    {
-      "item": "minecraft:apple"
-    },
-    {
-      "item": "minecraft:melon_slice"
-    },
-    {
-      "item": "minecraft:sweet_berries"
-    },
-    {
-      "item": "minecraft:glow_berries"
-    },
-    {
-      "item": "minecraft:chorus_fruit"
-    },
-    {
-      "item": "minecraft:golden_apple"
-    },
-    {
-      "item": "minecraft:enchanted_golden_apple"
-    },
-    {
-      "item": "croptopia:apricot"
-    },
-    {
-      "item": "croptopia:avocado"
-    },
-    {
-      "item": "croptopia:banana"
-    },
-    {
-      "item": "croptopia:blackberry"
-    },
-    {
-      "item": "croptopia:blueberry"
-    },
-    {
-      "item": "croptopia:cantaloupe"
-    },
-    {
-      "item": "croptopia:cherry"
-    },
-    {
-      "item": "croptopia:coconut"
-    },
-    {
-      "item": "croptopia:cranberry"
-    },
-    {
-      "item": "croptopia:currant"
-    },
-    {
-      "item": "croptopia:date"
-    },
-    {
-      "item": "croptopia:dragonfruit"
-    },
-    {
-      "item": "croptopia:elderberry"
-    },
-    {
-      "item": "croptopia:fig"
-    },
-    {
-      "item": "croptopia:grape"
-    },
-    {
-      "item": "croptopia:grapefruit"
-    },
-    {
-      "item": "croptopia:honeydew"
-    },
-    {
-      "item": "croptopia:kiwi"
-    },
-    {
-      "item": "croptopia:kumquat"
-    },
-    {
-      "item": "croptopia:lemon"
-    },
-    {
-      "item": "croptopia:lime"
-    },
-    {
-      "item": "croptopia:mango"
-    },
-    {
-      "item": "croptopia:nectarine"
-    },
-    {
-      "item": "croptopia:orange"
-    },
-    {
-      "item": "croptopia:peach"
-    },
-    {
-      "item": "croptopia:pear"
-    },
-    {
-      "item": "croptopia:persimmon"
-    },
-    {
-      "item": "croptopia:pineapple"
-    },
-    {
-      "item": "croptopia:plum"
-    },
-    {
-      "item": "croptopia:raspberry"
-    },
-    {
-      "item": "croptopia:rhubarb"
-    },
-    {
-      "item": "croptopia:saguaro"
-    },
-    {
-      "item": "croptopia:starfruit"
-    },
-    {
-      "item": "croptopia:strawberry"
-    },
-    {
-      "item": "alexsmobs:banana"
-    },
-    {
-      "item": "silentgear:nether_banana"
-    },
-    {
-      "item": "regions_unexplored:salmonberry"
-    },
-    {
-      "item": "regions_unexplored:duskmelon_slice"
-    },
-    {
-      "item": "regions_unexplored:hanging_earlight_fruit"
-    },
-    {
-      "item": "tsuki:grape"
-    },
-    {
-      "item": "tsuki:grape_green"
-    },
-    {
-      "item": "tsuki:ume"
-    },
-    {
-      "item": "tsuki:lemon"
-    },
-    {
-      "item": "tsuki:lime"
-    },
-    {
-      "item": "tsuki:lemon_juice"
-    },
-    {
-      "item": "tsuki:lime_juice"
-    },
-    {
-      "item": "tsuki:cola"
-    },
-    {
-      "item": "tsuki:blackcurrant_juice"
-    },
-    {
-      "item": "tsuki:orange_juice"
-    },
-    {
-      "item": "monstergirl:life_fruit"
-    },
-    {
-      "item": "monstergirl:soul_tether_berry"
-    },
-    {
-      "item": "monstergirl:dream_weave_berry"
-    },
-    {
-      "item": "monstergirl:halved_coconut"
-    },
-    {
-      "item": "yeastnfeast:elderberries"
-    },
-    {
-      "item": "yeastnfeast:rose_hips"
-    },
-    {
-      "item": "yeastnfeast:lemon"
-    },
-    {
-      "item": "yeastnfeast:hawthorn_berries"
-    },
-    {
-      "item": "spawn:dates"
-    },
-    {
-      "item": "crabbersdelight:coconut_halve"
-    }
+    "minecraft:apple",
+    "minecraft:melon_slice",
+    "minecraft:sweet_berries",
+    "minecraft:glow_berries",
+    "minecraft:chorus_fruit",
+    "minecraft:golden_apple",
+    "minecraft:enchanted_golden_apple",
+    "croptopia:apricot",
+    "croptopia:avocado",
+    "croptopia:banana",
+    "croptopia:blackberry",
+    "croptopia:blueberry",
+    "croptopia:cantaloupe",
+    "croptopia:cherry",
+    "croptopia:coconut",
+    "croptopia:cranberry",
+    "croptopia:currant",
+    "croptopia:date",
+    "croptopia:dragonfruit",
+    "croptopia:elderberry",
+    "croptopia:fig",
+    "croptopia:grape",
+    "croptopia:grapefruit",
+    "croptopia:honeydew",
+    "croptopia:kiwi",
+    "croptopia:kumquat",
+    "croptopia:lemon",
+    "croptopia:lime",
+    "croptopia:mango",
+    "croptopia:nectarine",
+    "croptopia:orange",
+    "croptopia:peach",
+    "croptopia:pear",
+    "croptopia:persimmon",
+    "croptopia:pineapple",
+    "croptopia:plum",
+    "croptopia:raspberry",
+    "croptopia:rhubarb",
+    "croptopia:saguaro",
+    "croptopia:starfruit",
+    "croptopia:strawberry",
+    "alexsmobs:banana",
+    "silentgear:nether_banana",
+    "regions_unexplored:salmonberry",
+    "regions_unexplored:duskmelon_slice",
+    "regions_unexplored:hanging_earlight_fruit",
+    "tsuki:grape",
+    "tsuki:grape_green",
+    "tsuki:ume",
+    "tsuki:lemon",
+    "tsuki:lime",
+    "tsuki:lemon_juice",
+    "tsuki:lime_juice",
+    "tsuki:cola",
+    "tsuki:blackcurrant_juice",
+    "tsuki:orange_juice",
+    "monstergirl:life_fruit",
+    "monstergirl:soul_tether_berry",
+    "monstergirl:dream_weave_berry",
+    "monstergirl:halved_coconut",
+    "yeastnfeast:elderberries",
+    "yeastnfeast:rose_hips",
+    "yeastnfeast:lemon",
+    "yeastnfeast:hawthorn_berries",
+    "spawn:dates",
+    "crabbersdelight:coconut_halve"
   ]
 }

@@ -32,10 +32,11 @@ import java.util.List;
  *   <li><b>frequency</b> — 统一计时器回调间隔：LOW(5s) / MEDIUM(3s) / HIGH(2s)，默认 MEDIUM。</li>
  *   <li><b>enable_food_record</b> — 是否启用食物历史记录，默认 true。</li>
  *   <li><b>enable_chat_log</b> — 是否向玩家发送聊天通知。需 debug=true 才生效，默认 false。</li>
+ *   <li><b>enable_always_eat</b> — 饱食时是否仍可进食，默认 true。启用后即使饥饿值满也能继续吃食物。</li>
  *   <li><b>debug</b> — 调试模式主开关：控制 ChatLog + BFS 追溯记录。默认 true。</li>
  *   <li><b>value_formula</b> — 营养值折算公式。保留变量 {@code healing} (int) 和 {@code saturation} (float)。
- *       支持 {@code + - * / ( )}。缺配启动崩溃。</li>
- *   <li><b>enable_always_eat</b> — 饱食时是否仍可进食，默认 true。启用后即使饥饿值满也能继续吃食物。</li>
+ *       支持 {@code + - * / ( ) ^}。缺配启动崩溃。</li>
+ *   <li><b>auto_generate_on_load</b> — 是否在服务器启动时自动运行 BFS 配方传播推断，默认 true。</li>
  *   <li><b>marginal_effect</b> — 边际效应配置。依赖 food_record，后者关闭时自动失效。</li>
  * </ul>
  *

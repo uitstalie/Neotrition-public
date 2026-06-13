@@ -5,7 +5,7 @@ import net.minecraft.nbt.CompoundTag;
 import java.util.Random;
 
 /**
- * 单个玩家的定时器状态，由 {@link Ticker} 驱动。
+ * 单个玩家的定时器状态，由 per-player tick 驱动。
  *
  * <h3>核心语义</h3>
  * <ul>
@@ -36,12 +36,9 @@ public class TimerState {
         this.offsetAssigned = false;
     }
 
-    // ────────── 配置 ──────────
+    // ────────── 频率配置 ──────────
 
-    /**
-     * 设置回调间隔。
-     * 若尚未分配随机偏移，会在此处一并完成。
-     */
+    /** 设置回调间隔。若首次设置，自动分配随机偏移。 */
     public void setFrequency(int seconds) {
         if (seconds <= 0) return;
         this.frequencySeconds = seconds;
@@ -64,7 +61,7 @@ public class TimerState {
      */
     public boolean tick() {
         if (!offsetAssigned) {
-            // 防御：若从未配置频率，使用当前默认值初始化
+            // 防御：初始化时未调用 setFrequency，用默认频率补初始化
             remainingSeconds = RANDOM.nextInt(Math.max(1, frequencySeconds));
             offsetAssigned = true;
         }
@@ -72,7 +69,6 @@ public class TimerState {
         remainingSeconds--;
 
         if (remainingSeconds <= 0) {
-            // 触发后重置为完整 interval
             remainingSeconds = frequencySeconds;
             return true;
         }

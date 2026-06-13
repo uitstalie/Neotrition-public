@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.mojang.serialization.JsonOps;
-import com.uitstalie.neotrition.api.data.DataPackJsonLoader;
+import com.uitstalie.neotrition.util.data.ValueFormulaEvaluator;
 import com.uitstalie.neotrition.util.log.Log;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -30,44 +30,6 @@ public class NutritionGroupDataListener extends SimpleJsonResourceReloadListener
 
     public NutritionGroupDataListener() {
         super(GSON, "groups");
-    }
-
-    /**
-     * 直接从 classpath 加载数据包 JSON（绕过 ResourceManager reload）。
-     * 用于集成服务端等 reload 不触发的场景。
-     *
-     * @param basePath 数据包基础路径，如 "data/neotrition/groups"
-     * @param fileName JSON 文件名，如 "fruit.json"
-     */
-    public void loadDirectly(String basePath, String fileName) {
-        String fullPath = "/" + basePath + "/" + fileName;
-        try {
-            JsonElement json = DataPackJsonLoader.loadJson(getClass(), "NutritionGroup", basePath, fileName);
-            if (json == null) return;
-            var result = NutritionGroupJson.CODEC.parse(JsonOps.INSTANCE, json)
-                    .getOrThrow(error -> new RuntimeException("Parse error: " + error));
-
-            ResourceLocation key = ResourceLocation.fromNamespaceAndPath("neotrition",
-                    fileName.replace(".json", ""));
-
-            if (result.groupName == null || result.groupName.isBlank()) {
-                Log.w("NutritionGroup", "Skipping group with empty group_name: " + key);
-                return;
-            }
-            if (result.groupIcon == null || result.groupIcon.isBlank()) {
-                Log.w("NutritionGroup", "Skipping group with empty group_icon: " + key);
-                return;
-            }
-            if (result.decayFrequency <= 0) {
-                Log.w("NutritionGroup", "Invalid decay_frequency in group " + key
-                        + " (must be >= 1), defaulting to 1");
-            }
-
-            Log.d("NutritionGroup", "Loaded group: " + key + " name=" + result.groupName);
-            nutritionGroups.put(key, result);
-        } catch (Exception e) {
-            Log.e("NutritionGroup", "Failed loading " + fullPath + " — " + e.getMessage());
-        }
     }
 
     @Override
@@ -96,10 +58,18 @@ public class NutritionGroupDataListener extends SimpleJsonResourceReloadListener
                     return;
                 }
 
-                // Validate decay config
+                // Validate and fix decay config
                 if (result.decayFrequency <= 0) {
                     Log.w("NutritionGroup", "Invalid decay_frequency in group " + key
                             + " (must be >= 1), defaulting to 1");
+                    result = new NutritionGroupJson(result.groupName, result.groupIcon,
+                            result.guiTextColor, result.guiPngColor,
+                            result.decayValue, 1, result.decayPressure, result.valueFormula);
+                }
+
+                // Dry-run formula validation: catch syntax errors at load time
+                if (result.valueFormula != null && !result.valueFormula.isBlank()) {
+                    ValueFormulaEvaluator.evaluate(result.valueFormula, 1, 0.5f);
                 }
 
                 Log.d("NutritionGroup", "Loaded group: " + key + " name=" + result.groupName);

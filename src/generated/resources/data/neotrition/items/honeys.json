@@ -1,11 +1,7 @@
 {
   "groups": "honeys",
   "items": [
-    {
-      "item": "minecraft:honey_bottle"
-    },
-    {
-      "item": "minecraft:honeycomb"
-    }
+    "minecraft:honey_bottle",
+    "minecraft:honeycomb"
   ]
 }

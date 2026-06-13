@@ -1,11 +1,7 @@
 {
   "groups": "coffee",
   "items": [
-    {
-      "item": "croptopia:coffee_beans"
-    },
-    {
-      "item": "silentgems:cup_of_coffee"
-    }
+    "croptopia:coffee_beans",
+    "silentgems:cup_of_coffee"
   ]
 }

@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.mojang.serialization.JsonOps;
-import com.uitstalie.neotrition.api.data.DataPackJsonLoader;
 import com.uitstalie.neotrition.util.log.Log;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -75,28 +74,5 @@ public class NutritionEffectDataListener extends SimpleJsonResourceReloadListene
 
     public List<NutritionEffectJson> getEffects() {
         return effects.values().stream().toList();
-    }
-
-    /**
-     * 直接从 classpath 加载（绕过 ResourceManager reload）。
-     */
-    public void loadDirectly(String basePath, String fileName) {
-        String fullPath = "/" + basePath + "/" + fileName;
-        try {
-            JsonElement json = DataPackJsonLoader.loadJson(getClass(), "NutritionEffect", basePath, fileName);
-            if (json == null) return;
-            var result = NutritionEffectJson.CODEC.parse(JsonOps.INSTANCE, json)
-                    .getOrThrow(error -> new RuntimeException("Parse error: " + error));
-            NutritionEffectJson sanitized = new NutritionEffectJson(result.entries.stream()
-                    .map(ce -> new NutritionEffectJson.CombinedEntry(ce.match(),
-                            ce.effects().stream().filter(NutritionEffectJson.EffectEntry::isValid).toList(),
-                            ce.attributes().stream().filter(NutritionEffectJson.AttributeEntry::isValid).toList()))
-                    .toList());
-            ResourceLocation key = ResourceLocation.fromNamespaceAndPath("neotrition",
-                    fileName.replace(".json", ""));
-            Log.d("NutritionEffect", "Loaded effect directly: " + key);
-        } catch (Exception e) {
-            Log.e("NutritionEffect", "Failed loading " + fullPath + " — " + e.getMessage());
-        }
     }
 }

@@ -94,7 +94,7 @@ public final class NutritionSyncService {
         var listener = NutritionDataRegistry.itemListener();
         if (listener != null) {
             for (var groupConfig : listener.getGroupConfigs().values()) {
-                String groupName = groupConfig.groups;
+                String groupName = groupConfig.group;
                 for (var itemEntry : groupConfig.items) {
                     String itemIdStr = itemEntry.item();
                     Integer manualVal = itemEntry.value();

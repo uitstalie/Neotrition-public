@@ -1,95 +1,35 @@
 {
   "groups": "trace_elements",
   "items": [
-    {
-      "item": "minecraft:iron_ingot"
-    },
-    {
-      "item": "minecraft:gold_ingot"
-    },
-    {
-      "item": "minecraft:copper_ingot"
-    },
-    {
-      "item": "minecraft:netherite_ingot"
-    },
-    {
-      "item": "minecraft:diamond"
-    },
-    {
-      "item": "minecraft:emerald"
-    },
-    {
-      "item": "minecraft:amethyst_shard"
-    },
-    {
-      "item": "minecraft:quartz"
-    },
-    {
-      "item": "minecraft:lapis_lazuli"
-    },
-    {
-      "item": "minecraft:redstone"
-    },
-    {
-      "item": "minecraft:coal"
-    },
-    {
-      "item": "minecraft:raw_iron"
-    },
-    {
-      "item": "minecraft:raw_gold"
-    },
-    {
-      "item": "minecraft:raw_copper"
-    },
-    {
-      "item": "create:zinc_ingot"
-    },
-    {
-      "item": "create:raw_zinc"
-    },
-    {
-      "item": "create:brass_ingot"
-    },
-    {
-      "item": "create:andesite_alloy"
-    },
-    {
-      "item": "silentgear:crimson_steel_ingot"
-    },
-    {
-      "item": "silentgear:crimson_iron_ingot"
-    },
-    {
-      "item": "silentgear:blaze_gold_ingot"
-    },
-    {
-      "item": "silentgear:azure_silver_ingot"
-    },
-    {
-      "item": "silentgear:azure_electrum_ingot"
-    },
-    {
-      "item": "silentgems:ruby"
-    },
-    {
-      "item": "silentgems:sapphire"
-    },
-    {
-      "item": "silentgems:topaz"
-    },
-    {
-      "item": "silentgems:opal"
-    },
-    {
-      "item": "silentgems:amber"
-    },
-    {
-      "item": "silentgems:carnelian"
-    },
-    {
-      "item": "minecraft:spider_eye"
-    }
+    "minecraft:iron_ingot",
+    "minecraft:gold_ingot",
+    "minecraft:copper_ingot",
+    "minecraft:netherite_ingot",
+    "minecraft:diamond",
+    "minecraft:emerald",
+    "minecraft:amethyst_shard",
+    "minecraft:quartz",
+    "minecraft:lapis_lazuli",
+    "minecraft:redstone",
+    "minecraft:coal",
+    "minecraft:raw_iron",
+    "minecraft:raw_gold",
+    "minecraft:raw_copper",
+    "create:zinc_ingot",
+    "create:raw_zinc",
+    "create:brass_ingot",
+    "create:andesite_alloy",
+    "silentgear:crimson_steel_ingot",
+    "silentgear:crimson_iron_ingot",
+    "silentgear:blaze_gold_ingot",
+    "silentgear:azure_silver_ingot",
+    "silentgear:azure_electrum_ingot",
+    "silentgems:ruby",
+    "silentgems:sapphire",
+    "silentgems:topaz",
+    "silentgems:opal",
+    "silentgems:amber",
+    "silentgems:carnelian",
+    "minecraft:spider_eye"
   ]
 }

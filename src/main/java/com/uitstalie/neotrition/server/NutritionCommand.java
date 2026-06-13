@@ -290,7 +290,7 @@ public final class NutritionCommand {
         if (manualListener != null) {
             manualGroups = new LinkedHashMap<>();
             for (var gc : manualListener.getGroupConfigs().values()) {
-                String groupName = gc.groups;
+                String groupName = gc.group;
                 for (var ie : gc.items) {
                     ResourceLocation id = ResourceLocation.tryParse(ie.item());
                     if (id != null) {

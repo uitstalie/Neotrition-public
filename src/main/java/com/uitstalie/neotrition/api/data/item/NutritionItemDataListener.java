@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.mojang.serialization.JsonOps;
-import com.uitstalie.neotrition.api.data.DataPackJsonLoader;
 import com.uitstalie.neotrition.util.log.Log;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -60,7 +59,7 @@ public class NutritionItemDataListener extends SimpleJsonResourceReloadListener 
                     return;
                 }
 
-                String groupName = result.groups;
+                String groupName = result.group;
                 Log.d("NutritionItem", "Loaded item group: " + groupName + " with " + result.items.size() + " items");
                 groupConfigs.put(groupName, result);
 
@@ -84,6 +83,7 @@ public class NutritionItemDataListener extends SimpleJsonResourceReloadListener 
     // ────── 查询接口 ──────
 
     /** 获取指定物品所属的营养组集合。 */
+    @Override
     public Set<String> getGroupsForItem(String itemId) {
         Set<String> groups = itemGroups.get(itemId);
         return groups != null ? groups : Set.of();
@@ -107,43 +107,10 @@ public class NutritionItemDataListener extends SimpleJsonResourceReloadListener 
         return groupConfigs;
     }
 
-    // ────── ItemNutritionSource 兼容 (deprecated, 保持接口兼容) ──────
-
-    @Override
-    @Nullable
-    public NutritionItemJson getItemConfig(ResourceLocation itemId) {
-        // 不再支持 per-item 查询，返回 null
-        return null;
-    }
+    // ────── ItemNutritionSource ──────
 
     @Override
     public List<NutritionItemJson> getItems() {
         return groupConfigs.values().stream().toList();
-    }
-
-    // ────── classpath 直接加载 ──────
-
-    public void loadDirectly(String basePath, String fileName) {
-        String fullPath = "/" + basePath + "/" + fileName;
-        try {
-            JsonElement json = DataPackJsonLoader.loadJson(getClass(), "NutritionItem", basePath, fileName);
-            if (json == null) return;
-            var result = NutritionItemJson.CODEC.parse(JsonOps.INSTANCE, json)
-                    .getOrThrow(error -> new RuntimeException("Parse error: " + error));
-            if (!result.isValid()) { Log.w("NutritionItem", "Skipping invalid: " + fullPath); return; }
-
-            String groupName = result.groups;
-            groupConfigs.put(groupName, result);
-            for (NutritionItemJson.ItemEntry entry : result.items) {
-                itemGroups.computeIfAbsent(entry.item(), k -> new HashSet<>()).add(groupName);
-                if (entry.hasManualValue()) {
-                    manualValues.computeIfAbsent(entry.item(), k -> new HashMap<>())
-                            .put(groupName, entry.value());
-                }
-            }
-            Log.d("NutritionItem", "Loaded item group directly: " + groupName + " (" + result.items.size() + " items)");
-        } catch (Exception e) {
-            Log.e("NutritionItem", "Failed loading " + fullPath + " — " + e.getMessage());
-        }
     }
 }
