@@ -5,9 +5,11 @@ import com.uitstalie.neotrition.util.log.Log;
 import net.minecraft.nbt.CompoundTag;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 单个营养组的运行时状态。
@@ -40,12 +42,8 @@ class NutritionData {
         if (perValue <= 0) return 0;
         int before = value;
         value = Math.min(MAX_VALUE, value + perValue);
-        dirty = true;
         return value - before;
     }
-
-    /** 标记数据已脏，下次 sync 必须推送。 */
-    boolean dirty;
 
     /**
      * 执行一次衰减推进。
@@ -136,7 +134,9 @@ public class NutritionDataStorage {
     public int addNutrition(String groupName, int perValue) {
         if (perValue <= 0) return 0;
         NutritionData data = groups.computeIfAbsent(groupName, k -> new NutritionData());
-        return data.addNutrition(perValue);
+        int added = data.addNutrition(perValue);
+        if (added > 0) dirty = true;
+        return added;
     }
 
     /**
@@ -182,6 +182,27 @@ public class NutritionDataStorage {
         }
     }
 
+    /**
+     * 饥饿联动衰减：玩家饥饿值下降时，按比例额外扣除营养值。
+     *
+     * @param hungerLost 本次饥饿值下降量
+     * @param multiplier 饥饿衰减倍率（来自 config.hungerDecayMultiplier）
+     * @param allGroups  所有营养组配置
+     */
+    public void applyHungerDecay(int hungerLost, double multiplier, List<NutritionGroupJson> allGroups) {
+        if (hungerLost <= 0 || multiplier <= 0 || allGroups == null || allGroups.isEmpty()) return;
+        for (NutritionGroupJson group : allGroups) {
+            if (group.groupName == null || group.groupName.isBlank()) continue;
+            NutritionData data = groups.get(group.groupName);
+            if (data == null || data.value <= 0) continue;
+            int extra = (int) Math.round(hungerLost * multiplier * group.decayValue);
+            if (extra > 0) {
+                data.value = Math.max(NutritionData.MIN_VALUE, data.value - extra);
+                dirty = true;
+            }
+        }
+    }
+
     // ────────── 查询 ──────────
 
     public int getNutrition(String groupName) {
@@ -221,12 +242,24 @@ public class NutritionDataStorage {
             Log.w("NutritionData", "Data pack changed since last save! "
                     + "Saved groups: [" + savedVersion + "] "
                     + "Current groups: [" + currentVersion + "] "
-                    + "Nutrition data for removed groups will be orphaned.");
+                    + "Nutrition data for removed groups will be discarded.");
         }
         groups.clear();
         if (!root.contains("groups")) return;
+        // 构建当前有效组名集合，反序列化时过滤已删除的组
+        Set<String> currentGroupNames = new HashSet<>();
+        var registryGroups = com.uitstalie.neotrition.api.data.NutritionDataRegistry.groups();
+        for (var g : registryGroups) {
+            if (g.groupName != null && !g.groupName.isBlank()) {
+                currentGroupNames.add(g.groupName);
+            }
+        }
         CompoundTag groupsTag = root.getCompound("groups");
         for (String key : groupsTag.getAllKeys()) {
+            if (!currentGroupNames.contains(key)) {
+                Log.d("NutritionData", "Skipping orphaned group during deserialize: " + key);
+                continue;
+            }
             CompoundTag dataTag = groupsTag.getCompound(key);
             NutritionData data = new NutritionData();
             data.readNBT(dataTag);

@@ -17,6 +17,7 @@ import java.util.List;
  *   "enable_chat_log": true,
  *   "debug": true,
  *   "value_formula": "healing * 2 + saturation * 0.5",
+ *   "hunger_decay_multiplier": 1.0,
  *   "marginal_effect": {
  *     "enable": true,
  *     "window_minutes": 5,
@@ -36,6 +37,8 @@ import java.util.List;
  *   <li><b>debug</b> — 调试模式主开关：控制 ChatLog + BFS 追溯记录。默认 true。</li>
  *   <li><b>value_formula</b> — 营养值折算公式。保留变量 {@code healing} (int) 和 {@code saturation} (float)。
  *       支持 {@code + - * / ( ) ^}。缺配启动崩溃。</li>
+ *   <li><b>hunger_decay_multiplier</b> — 饥饿联动衰减倍率。玩家饥饿值每下降 1 点，额外扣除 {@code hunger_decay_multiplier × 衰减值} 的营养。
+ *       设为 0 可禁用饥饿联动。默认 1.0。</li>
  *   <li><b>auto_generate_on_load</b> — 是否在服务器启动时自动运行 BFS 配方传播推断，默认 true。</li>
  *   <li><b>marginal_effect</b> — 边际效应配置。依赖 food_record，后者关闭时自动失效。</li>
  * </ul>
@@ -70,6 +73,7 @@ public class NutritionConfigJson {
     public final boolean enableAlwaysEat;
     public final boolean debug;
     public final String valueFormula;
+    public final double hungerDecayMultiplier;
     public final boolean autoGenerateOnLoad;
     public final MarginalEffect marginalEffect;
 
@@ -79,6 +83,7 @@ public class NutritionConfigJson {
                                boolean enableAlwaysEat,
                                boolean debug,
                                String valueFormula,
+                               double hungerDecayMultiplier,
                                boolean autoGenerateOnLoad,
                                MarginalEffect marginalEffect) {
         this.frequency = frequency;
@@ -87,6 +92,7 @@ public class NutritionConfigJson {
         this.enableAlwaysEat = enableAlwaysEat;
         this.debug = debug;
         this.valueFormula = valueFormula;
+        this.hungerDecayMultiplier = hungerDecayMultiplier;
         this.autoGenerateOnLoad = autoGenerateOnLoad;
         this.marginalEffect = marginalEffect;
     }
@@ -105,6 +111,8 @@ public class NutritionConfigJson {
                     .forGetter(c -> c.debug),
             Codec.STRING.fieldOf("value_formula")
                     .forGetter(c -> c.valueFormula),
+            Codec.DOUBLE.optionalFieldOf("hunger_decay_multiplier", 1.0)
+                    .forGetter(c -> c.hungerDecayMultiplier),
             Codec.BOOL.optionalFieldOf("auto_generate_on_load", true)
                     .forGetter(c -> c.autoGenerateOnLoad),
             MarginalEffect.CODEC.optionalFieldOf("marginal_effect", MarginalEffect.DEFAULT)

@@ -56,6 +56,22 @@ public final class NutritionRuntimeService {
             NutritionCapability cap = player.getData(AttributeTypeRegistry.NutritionCapability);
             if (cap == null) continue;
 
+            // ── 饥饿联动衰减（每秒检测，独立于定时器回调）──
+            int currentFood = player.getFoodData().getFoodLevel();
+            int lastFood = cap.getLastFoodLevel();
+            if (lastFood >= 0 && currentFood < lastFood) {
+                int hungerLost = lastFood - currentFood;
+                NutritionConfigJson config = NutritionDataRegistry.config();
+                if (config != null && config.hungerDecayMultiplier > 0) {
+                    double multiplier = config.hungerDecayMultiplier;
+                    // 睡眠时衰减减半
+                    if (player.isSleeping()) multiplier *= 0.5;
+                    var groups = NutritionDataRegistry.groups();
+                    cap.getNutritionData().applyHungerDecay(hungerLost, multiplier, groups);
+                }
+            }
+            cap.setLastFoodLevel(currentFood);
+
             TimerState timer = cap.getTimerState();
             if (timer == null) continue;
 
@@ -67,7 +83,7 @@ public final class NutritionRuntimeService {
 
             // ── Second event 触发：衰减 → food record → effect 刷新 → 同步 ──
             NutritionConfigJson config = NutritionDataRegistry.config();
-            if (config == null) return;
+            if (config == null) continue;
 
             boolean needSync = false;
 
@@ -98,6 +114,7 @@ public final class NutritionRuntimeService {
         NutritionCapability cap = player.getData(AttributeTypeRegistry.NutritionCapability);
         if (cap == null) return;
 
+        cap.setLastFoodLevel(player.getFoodData().getFoodLevel());
         NutritionEffectApplier.refreshAll(player, cap, NutritionDataRegistry.effectsByLocation());
         NutritionSyncService.syncToClient(player, cap);
     }

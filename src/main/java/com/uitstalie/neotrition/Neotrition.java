@@ -68,6 +68,7 @@ public class Neotrition {
     public void onServerStarted(ServerStartedEvent event) {
         NutritionAutoGenerateService.autoGenerateIfNeeded(event.getServer());
         NutritionSyncService.invalidateItemEntryCache();
+        NutritionSyncService.prewarmItemEntryCache();
     }
 
     private void gatherData(GatherDataEvent event) {

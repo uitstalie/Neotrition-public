@@ -12,6 +12,7 @@ import com.uitstalie.neotrition.service.NutritionAutoGenerateService;
 import com.uitstalie.neotrition.util.log.Log;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -60,7 +61,13 @@ public final class NutritionCommand {
                                         .suggests(GROUP_SUGGESTIONS)
                                         .executes(ctx -> getNutrition(
                                                 ctx.getSource(),
-                                                StringArgumentType.getString(ctx, "group")))))
+                                                StringArgumentType.getString(ctx, "group"),
+                                                null))
+                                        .then(Commands.argument("player", EntityArgument.player())
+                                                .executes(ctx -> getNutrition(
+                                                        ctx.getSource(),
+                                                        StringArgumentType.getString(ctx, "group"),
+                                                        EntityArgument.getPlayer(ctx, "player"))))))
                         .then(Commands.literal("set")
                                 .requires(src -> src.hasPermission(2))
                                 .then(Commands.argument("group", StringArgumentType.word())
@@ -69,9 +76,20 @@ public final class NutritionCommand {
                                                 .executes(ctx -> setNutrition(
                                                         ctx.getSource(),
                                                         StringArgumentType.getString(ctx, "group"),
-                                                        IntegerArgumentType.getInteger(ctx, "value"))))))
+                                                        IntegerArgumentType.getInteger(ctx, "value"),
+                                                        null))
+                                                .then(Commands.argument("player", EntityArgument.player())
+                                                        .executes(ctx -> setNutrition(
+                                                                ctx.getSource(),
+                                                                StringArgumentType.getString(ctx, "group"),
+                                                                IntegerArgumentType.getInteger(ctx, "value"),
+                                                                EntityArgument.getPlayer(ctx, "player")))))))
                         .then(Commands.literal("list")
-                                .executes(ctx -> listNutrition(ctx.getSource())))
+                                .executes(ctx -> listNutrition(ctx.getSource(), null))
+                                .then(Commands.argument("player", EntityArgument.player())
+                                        .executes(ctx -> listNutrition(
+                                                ctx.getSource(),
+                                                EntityArgument.getPlayer(ctx, "player")))))
                         .then(Commands.literal("autogen")
                                 .requires(src -> src.hasPermission(2))
                                 .executes(ctx -> autoGenerate(ctx.getSource())))
@@ -88,9 +106,16 @@ public final class NutritionCommand {
         );
     }
 
-    private static int getNutrition(CommandSourceStack src, String group) {
-        if (!(src.getEntity() instanceof ServerPlayer player)) {
-            src.sendFailure(Component.literal("Must be used by a player"));
+    private static ServerPlayer resolvePlayer(CommandSourceStack src, ServerPlayer target) {
+        if (target != null) return target;
+        if (src.getEntity() instanceof ServerPlayer player) return player;
+        return null;
+    }
+
+    private static int getNutrition(CommandSourceStack src, String group, ServerPlayer target) {
+        ServerPlayer player = resolvePlayer(src, target);
+        if (player == null) {
+            src.sendFailure(Component.literal("Must specify a player or be used by a player"));
             return 0;
         }
         NutritionCapability cap = player.getData(AttributeTypeRegistry.NutritionCapability);
@@ -98,14 +123,15 @@ public final class NutritionCommand {
         float pct = value / NUTRITION_PERCENT_DIVISOR;
 
         src.sendSuccess(() -> Component.literal(
-                group + ": " + value + " (" + String.format("%.3f", pct) + "%)"),
+                player.getName().getString() + " " + group + ": " + value + " (" + String.format("%.3f", pct) + "%)"),
                 false);
         return Command.SINGLE_SUCCESS;
     }
 
-    private static int setNutrition(CommandSourceStack src, String group, int value) {
-        if (!(src.getEntity() instanceof ServerPlayer player)) {
-            src.sendFailure(Component.literal("Must be used by a player"));
+    private static int setNutrition(CommandSourceStack src, String group, int value, ServerPlayer target) {
+        ServerPlayer player = resolvePlayer(src, target);
+        if (player == null) {
+            src.sendFailure(Component.literal("Must specify a player or be used by a player"));
             return 0;
         }
         NutritionCapability cap = player.getData(AttributeTypeRegistry.NutritionCapability);
@@ -113,14 +139,15 @@ public final class NutritionCommand {
         float pct = value / NUTRITION_PERCENT_DIVISOR;
 
         src.sendSuccess(() -> Component.literal(
-                "Set " + group + " to " + value + " (" + String.format("%.3f", pct) + "%)"),
+                "Set " + player.getName().getString() + " " + group + " to " + value + " (" + String.format("%.3f", pct) + "%)"),
                 true);
         return Command.SINGLE_SUCCESS;
     }
 
-    private static int listNutrition(CommandSourceStack src) {
-        if (!(src.getEntity() instanceof ServerPlayer player)) {
-            src.sendFailure(Component.literal("Must be used by a player"));
+    private static int listNutrition(CommandSourceStack src, ServerPlayer target) {
+        ServerPlayer player = resolvePlayer(src, target);
+        if (player == null) {
+            src.sendFailure(Component.literal("Must specify a player or be used by a player"));
             return 0;
         }
         NutritionCapability cap = player.getData(AttributeTypeRegistry.NutritionCapability);
@@ -134,7 +161,7 @@ public final class NutritionCommand {
             return Command.SINGLE_SUCCESS;
         }
 
-        src.sendSuccess(() -> Component.literal("== Neotrition Values =="), false);
+        src.sendSuccess(() -> Component.literal("== Neotrition Values for " + player.getName().getString() + " =="), false);
         for (var group : allGroups) {
             int value = data.getNutrition(group.groupName);
             float pct = value / NUTRITION_PERCENT_DIVISOR;

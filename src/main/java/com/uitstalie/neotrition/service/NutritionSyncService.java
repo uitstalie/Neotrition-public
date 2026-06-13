@@ -37,6 +37,13 @@ public final class NutritionSyncService {
         cachedItemEntries = null;
     }
 
+    /** 预构建 itemEntries 缓存（服务端启动后调用，避免首次登录卡顿）。 */
+    public static void prewarmItemEntryCache() {
+        if (cachedItemEntries == null) {
+            cachedItemEntries = buildItemEntries();
+        }
+    }
+
     public static void syncToClient(ServerPlayer player, NutritionCapability cap) {
         NutritionDataStorage data = cap.getNutritionData();
         Map<String, Integer> values = new LinkedHashMap<>();

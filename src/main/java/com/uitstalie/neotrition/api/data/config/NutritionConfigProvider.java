@@ -37,6 +37,7 @@ public class NutritionConfigProvider extends JsonCodecProvider<NutritionConfigJs
                 NutritionConfigJson.Frequency.HIGH,
                 true, false, true, true,
                 "healing * 100 + saturation * 50",
+                1.0,
                 true,
                 marginalEffect
         );

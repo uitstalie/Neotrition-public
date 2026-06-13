@@ -56,6 +56,8 @@ public class NutritionEventListener {
         Block block = evt.getLevel().getBlockState(evt.getPos()).getBlock();
         ItemStack blockItem = new ItemStack(block.asItem());
         if (blockItem.isEmpty()) return;
+        // 仅捕获可食用方块（蛋糕等），避免非食物方块污染 capturedFood
+        if (blockItem.getFoodProperties(null) == null) return;
 
         NutritionCapability cap = player.getData(AttributeTypeRegistry.NutritionCapability);
         if (cap != null) {

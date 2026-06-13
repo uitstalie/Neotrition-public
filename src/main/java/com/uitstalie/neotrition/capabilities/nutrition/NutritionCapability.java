@@ -47,6 +47,12 @@ public class NutritionCapability implements INBTSerializable<CompoundTag> {
      */
     private ItemStack capturedFood = ItemStack.EMPTY;
 
+    /** 上次记录的玩家饥饿值，用于计算饥饿联动衰减。不持久化。 */
+    private int lastFoodLevel = -1;
+
+    public int getLastFoodLevel() { return lastFoodLevel; }
+    public void setLastFoodLevel(int level) { this.lastFoodLevel = level; }
+
     public NutritionCapability() {
         this.timerState = new TimerState();
         this.nutritionData = new NutritionDataStorage();
